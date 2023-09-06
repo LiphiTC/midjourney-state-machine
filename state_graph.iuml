@@ -1,0 +1,77 @@
+@startuml
+state initActions{
+  initActions : imagine
+  initActions : blend
+  initActions : describe
+}
+
+state state1 {
+  state1 : reroll
+  state1 : upscale(1/2/3/4)
+  state1 : variation(1/2/3/4)
+}
+
+state state2 {
+  state2 : reroll
+  state2 : describe(1/2/3/4)
+  state2 : describe all
+}
+note left of state2
+  "describe(1/2/3/4)/describe all" refer to
+  Midjourney button "1/2/3/4/imagine all",
+  use "describe" to distinguish from initAction "imagine".
+end note
+
+state state3 {
+  state3: vary(strong/subtle)
+  state3: inpaint
+  state3: outpaint(1/1.5/2/custom)
+  state3: pan(up/down/left/right)
+}
+note left of state3
+  "inpaint" refer to button "Vary(Region)",
+  "outpaint(1/1.5/2/custom)" refer to button
+  "Make Square/Zoom Out 1.5x/Zoom Out 2x/Custom Zoom"
+end note
+
+state state4 {
+  state4: reroll
+  state4: upscale(1/2/3/4)
+}
+
+state state5 {
+  state5: outpaint(1/1.5/2/custom)
+  state5: pan(up/down)
+}
+
+state state6 {
+  state6: outpaint(1/1.5/2/custom)
+  state6: pan(left/right)
+}
+
+state join <<join>>
+
+initActions --> state1 : imagine/blend
+initActions --> state2 : describe
+
+state1 --> state1 : reroll/variation
+state1 --> state3 : upscale
+
+state2 --> state2 : reroll
+state2 --> state1 : describe/describe all
+
+state3 --> state1 : vary/inpaint/outpaint
+state3 --> state4 : panState=vertical/horizontal
+
+state4 --> state4 : reroll
+state4 --> state5 : panState=vertical
+state4 --> state6 : panState=horizontal
+
+state5 --> state4 : pan
+state6 --> state4 : pan
+
+state5 --> join : outpaint
+state6 --> join : outpaint
+
+join --> state1 : outpaint
+@enduml
