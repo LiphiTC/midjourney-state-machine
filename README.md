@@ -4,7 +4,7 @@ This repo represents the generation task state machine of Midjourney, as late as
 ## This repo contains three components:
 - A state machine graph build on [Plantuml](http://www.plantuml.com), stored in state_graph.iuml
 - A data model written in Golang, as the data structure of the states of the state machine, see /model/state.go
-- A set of checker functions written in Golang, it's used in [GoAPI.ai Midjourney API](https://goapi.ai/midjourney-api) for task state checking.
+- A set of checker functions written in Golang, it's used in [GoAPI's Midjourney API](https://www.goapi.ai/midjourney-api) for task state checking.
 
 ## How to use
 Run the test program by executing `go run main.go`.
