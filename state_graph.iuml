@@ -25,6 +25,7 @@ end note
 state state3 {
   state3: vary(strong/subtle)
   state3: inpaint
+  state3: upscale(2x/4x)
   state3: outpaint(1/1.5/2/custom)
   state3: pan(up/down/left/right)
 }
@@ -51,6 +52,10 @@ state state6 {
 
 state join <<join>>
 
+state state7 {
+  state7: upscale(2x/4x)
+}
+
 initActions --> state1 : imagine/blend
 initActions --> state2 : describe
 
@@ -62,6 +67,7 @@ state2 --> state1 : describe/describe all
 
 state3 --> state1 : vary/inpaint/outpaint
 state3 --> state4 : panState=vertical/horizontal
+state3 --> state7 : upscale(2x/4x)
 
 state4 --> state4 : reroll
 state4 --> state5 : panState=vertical
@@ -74,4 +80,6 @@ state5 --> join : outpaint
 state6 --> join : outpaint
 
 join --> state1 : outpaint
+
+state7 --> state7
 @enduml

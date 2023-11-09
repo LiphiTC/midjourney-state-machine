@@ -55,7 +55,7 @@ func RunActionCheckerExample() {
 			parentTaskId = taskId
 		}
 		parentTaskRuntime := taskRuntimes[parentTaskId]
-		taskId, err := CheckActionTriggered(action, parentTaskRuntime.ActionTree)
+		taskId, err := CheckActionTriggered(action, parentTaskRuntime.Action, parentTaskRuntime.ActionTree)
 		if err != nil {
 			fmt.Println(err)
 			fmt.Printf("available actions: %v\n\n", GetAvailableActionsFromMap(parentTaskRuntime.Action, parentTaskRuntime.ActionTree))

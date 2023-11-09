@@ -1,5 +1,5 @@
 # midjourney-state-machine
-This repo represents the generation task state machine of Midjourney, as late as September, 2023.
+This repo represents the generation task state machine of Midjourney, as late as November, 2023.
 
 ## This repo contains three components:
 - A state machine graph build on [Plantuml](http://www.plantuml.com), stored in state_graph.iuml
