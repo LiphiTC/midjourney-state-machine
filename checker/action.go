@@ -2,6 +2,7 @@ package checker
 
 import (
 	"fmt"
+	"sort"
 
 	"github.com/goapi-ai/midjourney-state-machine/model"
 	"golang.org/x/exp/slices"
@@ -12,9 +13,9 @@ import (
  * action: user input action
  * actionToTaskIdMap: taskId map for actions, key is action, value is taskId
  */
-func CheckActionTriggered(action string, actionToTaskIdMap map[string]string) (taskId string, err error) {
-	// reroll action can be triggered multiple times, so it is not recorded in the map
-	if action == model.ActionReroll {
+func CheckActionTriggered(action string, parentAction string, actionToTaskIdMap map[string]string) (taskId string, err error) {
+	// reroll action can be triggered multiple times, so it is not recorded in the map, but reroll still needs to be checked
+	if action == model.ActionReroll && AllowToReroll(parentAction) {
 		return "", nil
 	}
 	if taskId, ok := actionToTaskIdMap[action]; ok {
@@ -43,11 +44,16 @@ func GetAvailableActionsFromMap(parentAction string, actionToTaskIdMap map[strin
 			actions = append(actions, action)
 		}
 	}
-	// all action results can be rerolled, except upscael
-	if !slices.Contains(model.ActionsUpscale, parentAction) {
+	if AllowToReroll(parentAction) {
 		actions = append(actions, model.ActionReroll)
 	}
+	sort.Strings(actions)
 	return
+}
+
+func AllowToReroll(parentAction string) bool {
+	// all action results can be rerolled, except upscale
+	return !slices.Contains(model.ActionsUpscaleSeparate, parentAction) && !slices.Contains(model.ActionsUpscaleIncrease, parentAction)
 }
 
 /*
@@ -86,6 +92,8 @@ func GetActions(parentAction, action, panState string) ([]string, string) {
 		} else {
 			return model.State3Actions, panState
 		}
+	case model.ActionUpscale2x, model.ActionUpscale4x:
+		return model.State7Actions, ""
 	case model.ActionPanUp, model.ActionPanDown, model.ActionPanLeft, model.ActionPanRight:
 		if action == model.ActionPanUp || action == model.ActionPanDown {
 			return model.State4Actions, model.PanStateVertical
