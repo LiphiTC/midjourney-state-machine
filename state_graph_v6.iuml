@@ -1,0 +1,24 @@
+@startuml
+state initActions{
+  initActions : imagine(v6)
+}
+
+state state1 {
+  state1 : reroll
+  state1 : upscale(1/2/3/4)
+  state1 : variation(1/2/3/4)
+}
+
+state state3 {
+  state3: vary(strong/subtle)
+  state3: upscale(subtle/creative)
+}
+
+initActions --> state1 : imagine
+
+state1 --> state1 : reroll/variation
+state1 --> state3 : upscale(1/2/3/4)
+
+state3 --> state1 : vary
+state3 --> state3 : upscale(subtle/creative)
+@enduml

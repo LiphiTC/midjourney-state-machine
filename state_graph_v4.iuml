@@ -1,0 +1,46 @@
+@startuml
+state initActions{
+  initActions : imagine(v4)
+}
+
+state state1 {
+  state1 : reroll
+  state1 : upscale(1/2/3/4)
+  state1 : variation(1/2/3/4)
+}
+
+state state2 {
+  state2: vary
+  state2: inpaint
+  state2: upscale(light/beta)
+}
+note left of state2
+  "vary" refer to button "Make Variations"
+  "inpaint" refer to button "Vary(Region)"
+end note
+
+state state3 {
+  state3: vary
+  state3: upscale(beta)
+}
+
+state state4 {
+  state4: vary
+  state4: upscale(light)
+}
+
+initActions --> state1 : imagine
+
+state1 --> state1 : reroll/variation
+state1 --> state2 : upscale
+
+state2 --> state1 : vary/inpaint
+state2 --> state3 : upscale(light)
+state2 --> state4 : upscale(beta)
+
+state3 --> state4 : upscale(beta)
+state3 --> state1 : vary
+
+state4 --> state3 : upscale(light)
+state4 --> state1 : vary
+@enduml
