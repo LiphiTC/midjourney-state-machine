@@ -21,4 +21,11 @@ After entering an input, the program will process the action and display the res
 You can input any action from the avilable actions list to continue.
 
 ## Action state graph
-![action-state-graph](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/goapi-ai/midjourney-state-machine/main/state_graph.iuml)
+### v5
+![action-state-graph](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/goapi-ai/midjourney-state-machine/main/state_graph_v5.iuml)
+
+### v6
+![action-state-graph](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/goapi-ai/midjourney-state-machine/main/state_graph_v6.iuml)
+
+### v4
+![action-state-graph](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/goapi-ai/midjourney-state-machine/main/state_graph_v4.iuml)
